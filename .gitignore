@@ -1,0 +1,17 @@
+# Gradle files
+.gradle/
+**/build/
+
+# Local configuration
+local.properties
+
+# Android Studio
+*.iml
+.idea/
+
+# APKs
+*.apk
+
+# Assets generated during build
+app/src/main/assets/*
+
