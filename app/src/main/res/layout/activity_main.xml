@@ -10,7 +10,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textSize="24sp"
-        android:text="@string/new_button" />
+        android:text="@string/new_button"
+        android:backgroundTint="@android:color/holo_blue_light" />
 
     <Button
         android:id="@+id/repeatButton"
@@ -18,6 +19,25 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textSize="24sp"
-        android:text="@string/repeat_button" />
+        android:text="@string/repeat_button"
+        android:backgroundTint="@android:color/holo_orange_light" />
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:text="@string/done_button"
+        android:backgroundTint="@android:color/holo_green_light" />
+
+    <Button
+        android:id="@+id/failButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:text="@string/fail_button"
+        android:backgroundTint="@android:color/holo_red_light" />
 
 </LinearLayout>

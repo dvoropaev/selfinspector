@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var audioFiles: List<String>
     private var currentIndex: Int = -1
+    private val ratings = mutableMapOf<String, Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +25,35 @@ class MainActivity : AppCompatActivity() {
         findViewById<android.widget.Button>(R.id.repeatButton).setOnClickListener {
             playCurrent()
         }
+
+        findViewById<android.widget.Button>(R.id.doneButton).setOnClickListener {
+            adjustRating(1)
+            playRandom()
+        }
+
+        findViewById<android.widget.Button>(R.id.failButton).setOnClickListener {
+            adjustRating(-1)
+            playRandom()
+        }
     }
 
     private fun playRandom() {
         if (audioFiles.isEmpty()) return
-        val newIndex = if (audioFiles.size == 1) {
-            0
-        } else {
-            var candidate: Int
-            do {
-                candidate = Random.nextInt(audioFiles.size)
-            } while (candidate == currentIndex)
-            candidate
+        val totalWeight = audioFiles.sumOf { file ->
+            val rating = ratings[file] ?: 0
+            (10 - rating).coerceAtLeast(1)
         }
-        currentIndex = newIndex
+        var r = Random.nextInt(totalWeight)
+        var selectedIndex = 0
+        for ((index, file) in audioFiles.withIndex()) {
+            val weight = (10 - (ratings[file] ?: 0)).coerceAtLeast(1)
+            if (r < weight) {
+                selectedIndex = index
+                break
+            }
+            r -= weight
+        }
+        currentIndex = selectedIndex
         playCurrent()
     }
 
@@ -54,6 +70,13 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun adjustRating(delta: Int) {
+        if (currentIndex in audioFiles.indices) {
+            val file = audioFiles[currentIndex]
+            ratings[file] = (ratings[file] ?: 0) + delta
         }
     }
 
