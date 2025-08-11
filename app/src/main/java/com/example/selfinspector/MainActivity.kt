@@ -22,23 +22,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<android.widget.Button>(R.id.repeatButton).setOnClickListener {
-            playNext()
+            playCurrent()
         }
     }
 
     private fun playRandom() {
         if (audioFiles.isEmpty()) return
-        currentIndex = Random.nextInt(audioFiles.size)
-        playCurrent()
-    }
-
-    private fun playNext() {
-        if (audioFiles.isEmpty()) return
-        currentIndex = (currentIndex + 1) % audioFiles.size
+        val newIndex = if (audioFiles.size == 1) {
+            0
+        } else {
+            var candidate: Int
+            do {
+                candidate = Random.nextInt(audioFiles.size)
+            } while (candidate == currentIndex)
+            candidate
+        }
+        currentIndex = newIndex
         playCurrent()
     }
 
     private fun playCurrent() {
+        if (currentIndex !in audioFiles.indices) return
         try {
             mediaPlayer?.release()
             val fileName = audioFiles[currentIndex]
