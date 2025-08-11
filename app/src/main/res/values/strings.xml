@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SelfInspector</string>
-    <string name="new_button">Новое</string>
+    <string name="new_button">Новое задание/пропустить</string>
     <string name="repeat_button">Повторить</string>
+    <string name="done_button">Выполнено</string>
+    <string name="fail_button">Провалено</string>
 </resources>
