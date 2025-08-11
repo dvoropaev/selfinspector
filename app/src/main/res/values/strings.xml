@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SelfInspector</string>
+    <string name="new_button">Новое</string>
+    <string name="repeat_button">Повторить</string>
+</resources>

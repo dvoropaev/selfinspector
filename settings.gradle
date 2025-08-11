@@ -1,0 +1,2 @@
+rootProject.name = "selfinspector"
+include(":app")
