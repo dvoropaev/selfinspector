@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<android.widget.Button>(R.id.failButton).setOnClickListener {
-            adjustRating(-1)
+            adjustRating(-2)
             playRandom()
         }
     }
@@ -76,7 +76,8 @@ class MainActivity : AppCompatActivity() {
     private fun adjustRating(delta: Int) {
         if (currentIndex in audioFiles.indices) {
             val file = audioFiles[currentIndex]
-            ratings[file] = (ratings[file] ?: 0) + delta
+            val adjustedDelta = if (delta < 0) delta * 2 else delta
+            ratings[file] = (ratings[file] ?: 0) + adjustedDelta
         }
     }
 
